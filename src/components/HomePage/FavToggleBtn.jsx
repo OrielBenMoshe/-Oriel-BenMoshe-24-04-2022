@@ -12,7 +12,6 @@ export default function FavToggleBtn(props) {
       ? setSelected(true)
       : setSelected(false);
     } 
-    // else setSelected(false);
   }, [props.location])
   
   useEffect(() => {

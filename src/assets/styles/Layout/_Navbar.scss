@@ -1,10 +1,7 @@
 .css-hip9hq-MuiPaper-root-MuiAppBar-root{
-    background-color: #272727 !important;
+    background-color: $black !important;
 
 }
-.Navbar {
-}
-
 .SearchBar {
     .MuiAutocomplete-root {
         background-color: white;
@@ -14,9 +11,6 @@
     .MuiOutlinedInput-root {
         height: 50px;
     }
-    .search-field {
-
-    } 
     .css-1iz4iln,
     #combo-box-demo-label {
         color: black

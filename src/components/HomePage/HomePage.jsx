@@ -47,15 +47,12 @@ export default function HomePage() {
     }, [location])
     
     useEffect(() => {
-        // console.log("weather:",weather);
         weather && weather.data && 
             setCurrentWeather(weather.data[0]);
         weather.isSuccess ? setIsError(false) : setIsError(true);
     }, [weather])
     
     useEffect(() => {
-        // console.log("forecast:", forecast);
-        // console.log("forecast:", forecast.data);
         forecast && forecast.data && 
             setForecastData( editForecastData(forecast.data.DailyForecasts) );
         forecast.isSuccess ? setIsError(false) : setIsError(true);

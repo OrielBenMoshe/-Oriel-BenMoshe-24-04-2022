@@ -1,13 +1,20 @@
-import { useEffect } from "react";
-import { getWeather } from '../features/weather/weatherSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function useLocationWeather(locationKey) {
-  const dispatch = useDispatch();
-  const { weather } = useSelector((state) => state);
+  const url = process.env.REACT_APP_WEATHER;
+  const apiKey = process.env.REACT_APP_APIKEY;
+  const [weather, setWeather] = useState()
   
+  const getWeather = (locationKey) => {
+    axios.get(`${url}/${locationKey}?apikey=${apiKey}&metric=true`)
+      .then(({data}) => {
+        setWeather(data[0]);
+      });
+  }
+
   useEffect(() => {
-    dispatch(getWeather(locationKey));
+    getWeather(locationKey)
   }, [])
     
   return weather;

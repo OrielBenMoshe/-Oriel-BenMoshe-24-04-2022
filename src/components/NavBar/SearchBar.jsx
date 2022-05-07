@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAutocomplete } from "../../features/autocomplete/autocompleteSlice";
 
 import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -39,13 +38,11 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 export default function SearchBar(props) {
   const dispatch = useDispatch();
   const { autocomplete } = useSelector((state) => state);
-  const [value, setValue] = useState();
   const [inputValue, setInputValue] = useState('');
   const [list, setList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => { 
-    // console.log("inputValue:", inputValue);
     if (inputValue.length === 3) {
       dispatch(getAutocomplete(inputValue));
     } 
@@ -63,12 +60,7 @@ export default function SearchBar(props) {
       setList(editedData);
     }
   }, [autocomplete]);
-  
-  useEffect(() => {
-    // console.log("list:", list);
-  }, [list]);
-  
-  
+    
   return (
     <Search className="SearchBar">
       <SearchIconWrapper>
@@ -76,12 +68,10 @@ export default function SearchBar(props) {
       </SearchIconWrapper>
       <Autocomplete
         disablePortal
-        // filterOptions={(x) => x}
         autoComplete={true}
         loading={true}
         id="combo-box-demo"
         onChange={(event, newValue) => {
-          setValue(newValue);
           navigate(`/Home?locKey=${newValue.locKey}&locName=${newValue.label}`, { replace: true })
           window.location.reload();
         }}

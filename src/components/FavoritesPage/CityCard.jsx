@@ -11,27 +11,25 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import useLocationWeather from '../../hooks/useLocationWeather';
 
 export default function CityCard(props) {
-  const data = useLocationWeather(props.location.locKey);
   const [weather, setWeather] = useState()
-  
+  const data = useLocationWeather(props.location.locKey);
+
   const handleRemoveCard = (e) => {
     props.removeCard(props.location.locKey)
   }
 
   useEffect(() => {
-    if (data.data) {
-      setWeather(data.data[0])
-    }
-    data.isSuccess ? props.isError(false) : props.isError(true);
-  }, [])
+    setWeather(data)
+    data ? props.isError(false) : props.isError(true);
+  }, [data])
 
   return (
     <Box sx={{ minWidth: 275 }} className="CityCard" >
       <Card elevation={1}>
         <CardContent>
-          <a href="#" className="remove-btn" onClick={(e) => handleRemoveCard(e)} >
+          <div className="remove-btn" onClick={(e) => handleRemoveCard(e)} >
             <CloseRoundedIcon />
-          </a>
+          </div>
           <header>
             <h3 className="city-name">{props.location.locName}</h3>
             <div className="weather-logo">
@@ -40,12 +38,11 @@ export default function CityCard(props) {
           </header>
           <div className="temperature">
             <span className="max">{weather && weather.Temperature.Metric.Value}˚</span>
-            {/* <span className="min">{" /16˚"}</span> */}
           </div>
         </CardContent>
         <CardActions disableSpacing={true}>
           <Link to={`/home/?locKey=${props.location.locKey}&locName=${props.location.locName}`}>
-            <Button variant="contained">Check Out</Button>
+            <Button variant="contained">SHOW MORE</Button>
           </Link>
         </CardActions>
       </Card>
